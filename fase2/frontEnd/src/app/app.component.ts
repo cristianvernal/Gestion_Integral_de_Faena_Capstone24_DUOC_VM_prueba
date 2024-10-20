@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
-import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
+import { InteractionStatus, PopupRequest, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -15,8 +15,10 @@ export class AppComponent implements OnInit{
   title = 'Toma de Asistencia';
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
+  
 
   constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private authService: MsalService) {}
+
 
   ngOnInit() {
       
@@ -31,15 +33,16 @@ export class AppComponent implements OnInit{
   }
 
   login() {
-    if(this.msalGuardConfig.authRequest){
-      this.authService.loginRedirect({...this.msalGuardConfig.authRequest} as RedirectRequest);
+    if (this.msalGuardConfig.authRequest){
+      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest,
+      );
     } else {
-      this.authService.loginRedirect();
+      this.authService.loginPopup();
     }
   }
   logout() { 
-    this.authService.logoutRedirect({
-      postLogoutRedirectUri: 'http://localhost:4200'
+    this.authService.logoutPopup({
+      mainWindowRedirectUri: 'http://localhost:4200',
     });
   }
   setLoginDisplay() {

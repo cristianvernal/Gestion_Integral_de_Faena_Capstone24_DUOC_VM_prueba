@@ -14,10 +14,8 @@
     alt="Imagen de Login"
     class="w-48 h-48 object-cover mb-4 relative z-10" 
     />
-    <button  *ngIf="!loginDisplay" (click)="login()" class="bg-gray-800 text-white font-semibold py-2 px-4 rounded transition duration-300 relative z-10">Iniciar Sesión</button>
+    <button  *ngIf="!loginDisplay" (click)="login()" class="bg-gray-800 text-white font-semibold py-2 px-4 rounded transition duration-300 relative z-10 justify-items-end">Iniciar Sesión</button>
   </div>
-  
-  
   <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
   <app-layout *ngIf="loginDisplay"></app-layout>
 <router-outlet/>

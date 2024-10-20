@@ -76,15 +76,15 @@ import { ReportesComponent } from './business/reportes/reportes.component';
       new PublicClientApplication(msalConfig),
       {
         // The routing guard configuration.
-        interactionType: InteractionType.Redirect,
+        interactionType: InteractionType.Popup,
         authRequest: {
-          scopes: protectedResources.todoListApi.scopes,
+          scopes: protectedResources.todoListApi.scopes
         },
       },
       {
         // MSAL interceptor configuration.
         // The protected resource mapping maps your web API with the corresponding app scopes. If your code needs to call another web API, add the URI mapping here.
-        interactionType: InteractionType.Redirect,
+        interactionType: InteractionType.Popup,
         protectedResourceMap: new Map([
           [
             protectedResources.todoListApi.endpoint,
