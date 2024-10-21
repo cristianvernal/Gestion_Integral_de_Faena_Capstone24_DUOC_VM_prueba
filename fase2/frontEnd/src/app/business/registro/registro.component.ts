@@ -35,6 +35,6 @@ export default class RegistroComponent {
   constructor(private router: Router) {}
   
   irAAgregarTrabajador() {
-    this.router.navigate(['/app/agregar-trabajador']);
+    this.router.navigate(['agregar-trabajador']);
   }
 }

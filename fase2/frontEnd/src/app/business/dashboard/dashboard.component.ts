@@ -38,13 +38,13 @@ export  class DashboardComponent {
   constructor(private router: Router) {}
 
   irACrearFaena() {
-    this.router.navigate(['/app/crear-faena']);
+    this.router.navigate(['crear-faena']);
   }
 
   agregarFaena(nuevaFaena: Faena) {
     this.faenas.push(nuevaFaena);
     if (this.paginator) {
-      this.paginator.length = this.faenas.length; // Verifica si el paginador está inicializado
+      this.paginator.length = this.faenas.length; 
     }
   }
   // Método para obtener las faenas de la página actual
