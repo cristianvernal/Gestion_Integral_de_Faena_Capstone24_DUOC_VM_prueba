@@ -1,7 +1,4 @@
 
-  
-  <!-- <a mat-button [routerLink]="['profile']">Profile</a>
-  <a mat-button [routerLink]="['webapi']">Web API</a> -->
   <div *ngIf="!loginDisplay" class="relative flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <img
     src="img/empleo-mineria.jpg"  
@@ -16,6 +13,8 @@
     />
     <button  *ngIf="!loginDisplay" (click)="login()" class="bg-gray-800 text-white font-semibold py-2 px-4 rounded transition duration-300 relative z-10 justify-items-end">Iniciar Sesión</button>
   </div>
+
+    <app-layout *ngIf="loginDisplay"/>
+  
   <!-- <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button> -->
-  <app-layout *ngIf="loginDisplay"></app-layout>
-<router-outlet/>
+  <router-outlet/>
