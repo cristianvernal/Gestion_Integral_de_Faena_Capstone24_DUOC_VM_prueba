@@ -9,7 +9,8 @@ import { DashboardComponent } from './business/dashboard/dashboard.component';
 import  VerificacionComponent  from './business/verificacion/verificacion.component';
 import RegistroComponent from './business/registro/registro.component';
 import { ReportesComponent } from './business/reportes/reportes.component';
-import {AgregarTrabajadorComponent} from './shared/components/agregar-trabajador/agregar-trabajador.component';
+import AgregarTrabajadorComponent from './shared/components/agregar-trabajador/agregar-trabajador.component';
+import  CrearFaenaComponent  from './shared/components/crear-faena/crear-faena.component';
 
 
 
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path:'agregar-trabajador',
     component: AgregarTrabajadorComponent,
+    canActivate: [MsalGuard]
+  },
+  {
+    path:'crear-faena',
+    component: CrearFaenaComponent,
     canActivate: [MsalGuard]
   }
   

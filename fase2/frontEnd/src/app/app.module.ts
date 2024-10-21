@@ -36,6 +36,11 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { ReportesComponent } from './business/reportes/reportes.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { DatosUsuarioComponent } from './shared/components/datos-usuario/datos-usuario.component';
+
 
 
 
@@ -49,24 +54,21 @@ import { ReportesComponent } from './business/reportes/reportes.component';
     HomeComponent,
     WebapiComponent,
     ReportesComponent,
-
-  
-
+    DatosUsuarioComponent,
   ],
   imports: [
     BrowserModule,
     LayoutComponent,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
     MatPaginator,
     AppRoutingModule,
-
-    /* Changes start here. */
-    // Import the following Angular materials.
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
     MatTableModule,
     MatSidenavModule,
-
     MatIconModule,
     // Import the HTTP client.
     HttpClientModule,
