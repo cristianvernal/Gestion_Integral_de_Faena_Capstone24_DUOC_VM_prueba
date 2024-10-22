@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 import { HomeComponent } from './authentication/home/home.component';
-import { ProfileComponent } from './authentication/profile/profile.component';
-import { WebapiComponent } from './authentication/webapi/webapi.component';
 import { UsuarioComponent } from './business/usuario/usuario.component';
 import { DashboardComponent } from './business/dashboard/dashboard.component';
 import  VerificacionComponent  from './business/verificacion/verificacion.component';
@@ -25,13 +23,9 @@ const routes: Routes = [
     canActivate: [MsalGuard]
   },
   {
-    path: 'webapi',
-    component: WebapiComponent,
-    canActivate: [MsalGuard]
-  },
-  {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [MsalGuard]
   },
   {
     path: 'usuario',

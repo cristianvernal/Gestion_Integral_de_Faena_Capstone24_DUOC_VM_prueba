@@ -20,7 +20,7 @@ export  class LayoutComponent {
 
   constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService ){}
 
-  NgOnInit(): void {
+  ngOnInit(): void {
     this.msalBroadcastService.msalSubject$
       .pipe(
         filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
