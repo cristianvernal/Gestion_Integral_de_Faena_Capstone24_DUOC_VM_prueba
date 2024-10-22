@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './agregar-trabajador.component.html',
-  styleUrls: ['./agregar-trabajador.component.css'] // Asegúrate de tener este archivo o eliminar esta línea si no lo necesitas
+  styleUrls: ['./agregar-trabajador.component.css']
 })
 export  default class AgregarTrabajadorComponent {
   trabajador = {

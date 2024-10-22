@@ -3,7 +3,7 @@ import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfigur
 import { InteractionStatus, PopupRequest, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   private readonly _destroying$ = new Subject<void>();
   
 
-  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private authService: MsalService) {}
+  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private authService: MsalService, private router: Router) {}
 
 
   ngOnInit() {
@@ -34,17 +34,21 @@ export class AppComponent implements OnInit{
 
   login() {
     if (this.msalGuardConfig.authRequest){
-      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest,
-      );
+      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest,)
+      .subscribe({
+        next: (result) => {
+          this.router.navigate(['dashboard'])
+        }
+      })
     } else {
       this.authService.loginPopup();
     }
   }
-  logout() { 
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: 'http://localhost:4200',
-    });
-  }
+  // logout() { 
+  //   this.authService.logoutPopup({
+  //     mainWindowRedirectUri: 'http://localhost:4200',
+  //   });
+  // }
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
@@ -52,4 +56,5 @@ export class AppComponent implements OnInit{
     this._destroying$.next(undefined);
     this._destroying$.complete();
   }
+  
 }

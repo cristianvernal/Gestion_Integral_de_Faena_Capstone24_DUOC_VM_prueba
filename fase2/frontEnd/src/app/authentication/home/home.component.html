@@ -1,4 +1,4 @@
-<!-- <div class="relative flex flex-col items-center justify-center min-h-screen bg-gray-100" >
+<div  class="relative flex flex-col items-center justify-center min-h-screen bg-gray-100" >
     <img
     src="img/empleo-mineria.jpg"  
     alt="Fondo"
@@ -10,22 +10,15 @@
     alt="Imagen de Login"
     class="w-48 h-48 object-cover mb-4 relative z-10" 
     />
-    <button
-    class="bg-gray-800 text-white font-semibold py-2 px-4 rounded transition duration-300 relative z-10"
-    
-    >
-    Iniciar Sesión
-</button>
-</div> -->
-
-<!-- <div *ngIf="!loginDisplay"> -->
-    <!-- <p>Please sign-in to see your profile information.</p> -->
-<!-- </div> -->
-
-<div *ngIf="loginDisplay">
+    <button  *ngIf="!loginDisplay" (click)="login()" class="bg-gray-800 text-white font-semibold py-2 px-4 rounded transition duration-300 relative z-10 justify-items-end">Iniciar Sesión</button>
 </div>
+<router-outlet/>
 
-<!-- component -->
 
-<!-- <app-layout/> -->
+<!-- <div *ngIf="!loginDisplay">
+</div> -->
+    <!-- <p>Please sign-in to see your profile information.</p> -->
+<!-- 
+<div *ngIf="loginDisplay">
+</div> -->
 

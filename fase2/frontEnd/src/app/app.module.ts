@@ -72,31 +72,26 @@ import { DatosUsuarioComponent } from './shared/components/datos-usuario/datos-u
     MatIconModule,
     // Import the HTTP client.
     HttpClientModule,
-
     // Initiate the MSAL library with the MSAL configuration object
-    MsalModule.forRoot(
-      new PublicClientApplication(msalConfig),
-      {
+    MsalModule.forRoot(new PublicClientApplication(msalConfig), {
         // The routing guard configuration.
         interactionType: InteractionType.Popup,
         authRequest: {
-          scopes: protectedResources.todoListApi.scopes
+            scopes: protectedResources.todoListApi.scopes
         },
-      },
-      {
+    }, {
         // MSAL interceptor configuration.
         // The protected resource mapping maps your web API with the corresponding app scopes. If your code needs to call another web API, add the URI mapping here.
         interactionType: InteractionType.Popup,
         protectedResourceMap: new Map([
-          [
-            protectedResources.todoListApi.endpoint,
-            protectedResources.todoListApi.scopes,
-          ],
+            [
+                protectedResources.todoListApi.endpoint,
+                protectedResources.todoListApi.scopes,
+            ],
         ]),
-      }
-    ),
-    /* Changes end here. */
-  ],
+    }),
+    SidebarComponent
+],
   providers: [
     /* Changes start here. */
     {
