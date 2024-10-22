@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  sidebarVisible: boolean = false; // Variable para controlar la visibilidad del sidebar
 
+  toggleSidebar() {
+    this.sidebarVisible = !this.sidebarVisible; // Alternar visibilidad
+  }
 }

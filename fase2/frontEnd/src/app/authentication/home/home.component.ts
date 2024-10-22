@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MSAL_BROADCAST_CONFIG, MsalBroadcastService, MsalGuardConfiguration, MsalService } from '@azure/msal-angular';
+import { EventMessage, EventType, InteractionStatus, PopupRequest } from '@azure/msal-browser';
+import { Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -8,10 +10,11 @@ import { filter } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   loginDisplay = false;
+  // private readonly _destroying$ = new Subject<void>();
 
-  constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
+  constructor(@Inject(MSAL_BROADCAST_CONFIG)private msalGuardConfig: MsalGuardConfiguration, private authService: MsalService, private msalBroadcastService: MsalBroadcastService, private router: Router ) { }
 
   ngOnInit(): void {
     this.msalBroadcastService.msalSubject$
@@ -34,6 +37,17 @@ export class HomeComponent implements OnInit {
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
-
+  login() {
+    if (this.msalGuardConfig.authRequest){
+      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest,)
+      .subscribe({
+        next: (result) => {
+          this.router.navigate(['dashboard'])
+        }
+      })
+    } else {
+      this.authService.loginPopup();
+    }
+  }
   
 }

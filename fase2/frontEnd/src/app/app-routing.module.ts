@@ -13,6 +13,7 @@ import  CrearFaenaComponent  from './shared/components/crear-faena/crear-faena.c
 
 
 const routes: Routes = [
+ 
   {
     path: '',
     component: HomeComponent

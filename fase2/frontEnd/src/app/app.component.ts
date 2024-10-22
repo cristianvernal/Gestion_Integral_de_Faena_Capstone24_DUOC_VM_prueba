@@ -44,11 +44,11 @@ export class AppComponent implements OnInit{
       this.authService.loginPopup();
     }
   }
-  logout() { 
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: 'http://localhost:4200',
-    });
-  }
+  // logout() { 
+  //   this.authService.logoutPopup({
+  //     mainWindowRedirectUri: 'http://localhost:4200',
+  //   });
+  // }
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
@@ -56,4 +56,5 @@ export class AppComponent implements OnInit{
     this._destroying$.next(undefined);
     this._destroying$.complete();
   }
+  
 }
