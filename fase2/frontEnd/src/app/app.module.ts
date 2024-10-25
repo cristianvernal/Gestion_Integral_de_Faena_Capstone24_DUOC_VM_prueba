@@ -53,7 +53,6 @@ import { DatosUsuarioComponent } from './shared/components/datos-usuario/datos-u
     ProfileComponent,
     HomeComponent,
     WebapiComponent,
-    ReportesComponent,
     DatosUsuarioComponent,
   ],
   imports: [

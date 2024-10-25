@@ -4,12 +4,14 @@ import { DatosUsuarioComponent } from '../../shared/components/datos-usuario/dat
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2'
+import { LayoutComponent } from '../../shared/components/layout/layout.component';
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, LayoutComponent, SidebarComponent],
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css'], // Corrige `styleUrl` a `styleUrls`
 })

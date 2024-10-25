@@ -1,46 +1,53 @@
-<h1 class="text-3xl font-sans  ml-2 font-bold">Gestión</h1>
-<div class="flex justify-end items-center p-4 container">
-  <button (click)="openModal()" class="bg-gray-800 text-white p-2 rounded">
-    Crear Faena
-  </button>
+<div class="flex items-baseline justify-between">
+  <app-sidebar ></app-sidebar>
+  
+  <div class="flex-auto container">
+    <div class="flex justify-between items-center p-4">
+      <h1 class="text-3xl font-sans ml-2 font-bold">Gestión</h1>
+      <button (click)="openModal()" class="bg-gray-800 text-white p-2 rounded">
+        Crear Faena
+      </button>
+    </div>
+    
+    <div class="overflow-x-auto mt-4">
+      <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 border-b text-left">Nombre</th>
+            <th class="py-2 px-4 border-b text-center">Fecha de Inicio</th>
+            <th class="py-2 px-4 border-b text-center">Fecha de Término</th>
+            <th class="py-2 px-4 border-b text-left">Encargado</th>
+            <th class="py-2 px-4 border-b text-left">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let faena of faenas" class="hover:bg-gray-100">
+            <td class="py-2 px-4 border-b">{{ faena.nombre }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ faena.fechaInicio }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ faena.fechaTermino }}</td>
+            <td class="py-2 px-4 border-b">{{ faena.encargado }}</td>
+            <td class="py-2 px-4 border-b">
+              <button class="text-green-500 hover:underline">
+                <span class="material-icons">person</span>
+              </button>
+              <button class="text-blue-500 hover:underline">
+                <span class="material-icons">edit</span>
+              </button>
+              <button class="text-red-500 hover:underline">
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="faenas.length"
+        (page)="onPageChange($event)"
+        aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
 </div>
-<!-- <app-crear-faena (faenaCreada)="agregarFaena($event)"></app-crear-faena> -->
-<div class="overflow-x-auto mt-4 container">
-  <table class="min-w-full bg-white border border-gray-200">
-    <thead>
-      <tr class="bg-gray-100">
-        <th class="py-2 px-4 border-b text-left">Nombre</th>
-        <th class="py-2 px-4 border-b text-center">Fecha de Inicio</th>
-        <th class="py-2 px-4 border-b text-center">Fecha de Término</th>
-        <th class="py-2 px-4 border-b text-left">Encargado</th>
-        <th class="py-2 px-4 border-b text-left">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let faena of faenas" class="hover:bg-gray-100">
-        <td class="py-2 px-4 border-b">{{ faena.nombre }}</td>
-        <td class="py-2 px-4 border-b text-center">{{ faena.fechaInicio }}</td>
-        <td class="py-2 px-4 border-b text-center">{{ faena.fechaTermino }}</td>
-        <td class="py-2 px-4 border-b">{{ faena.encargado }}</td>
-        <td class="py-2 px-4 border-b">
-          <button class="text-green-500 hover:underline">
-            <span class="material-icons">person</span>
-          </button>
-          <button class="text-blue-500 hover:underline">
-            <span class="material-icons">edit</span>
-          </button>
-          <button class="text-red-500 hover:underline">
-            <span class="material-icons">delete</span>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <mat-paginator [length]="faenas.length"
-                 (page)="onPageChange($event)"
-                 aria-label="Select page">
-  </mat-paginator>
-</div>
+
 
 <!-- Modal -->
 <div
@@ -49,33 +56,33 @@
   aria-labelledby="modal-title"
   role="dialog"
   aria-modal="true"
->
-<div class="fixed inset-0 bg-black bg-opacity-50"></div>
+  >
+  <div class="fixed inset-0 bg-black bg-opacity-50"></div>
   <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white rounded-lg shadow-lg overflow-hidden w-1/2 transform transition-transform duration-300"
-         [ngClass]="{ 'scale-100': isModalOpen, 'scale-95': !isModalOpen }">
-      <div class="p-4 border-b bg-black">
-        <h3 class="text-lg font-medium text-white" id="modal-title">
-          Agregar Nueva Faena
-        </h3>
-        <button (click)="isModalOpen = false" class="absolute top-2 right-4 text-white focus:outline-none text-2xl p-2">
-          &times; <!-- Símbolo de X -->
-        </button>
-      </div>
-      <div class="p-6 space-y-4">
-        <!-- Formulario en el modal -->
-        <form (ngSubmit)="submitForm()">
-          <div class="flex flex-col">
-            <label for="nombre" class="mb-2 text-sm">Nombre</label>
-            <input
-              [(ngModel)]="nombre"
-              id="nombre"
-              name="nombre"
-              type="text"
-              class="p-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
+    [ngClass]="{ 'scale-100': isModalOpen, 'scale-95': !isModalOpen }">
+    <div class="p-4 border-b bg-black">
+      <h3 class="text-lg font-medium text-white" id="modal-title">
+        Agregar Nueva Faena
+      </h3>
+      <button (click)="isModalOpen = false" class="absolute top-2 right-4 text-white focus:outline-none text-2xl p-2">
+        &times; <!-- Símbolo de X -->
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <!-- Formulario en el modal -->
+      <form (ngSubmit)="submitForm()">
+        <div class="flex flex-col">
+          <label for="nombre" class="mb-2 text-sm">Nombre</label>
+          <input
+          [(ngModel)]="nombre"
+          id="nombre"
+          name="nombre"
+          type="text"
+          class="p-2 border border-gray-300 rounded-md"
+          required
+          />
+        </div>
           <div class="flex flex-col mt-4">
             <label for="apellido" class="mb-2 text-sm">Fecha de Inicio</label>
             <input
@@ -90,36 +97,36 @@
           <div class="flex flex-col mt-4">
             <label for="correo" class="mb-2 text-sm">Fecha de Término</label>
             <input
-              [(ngModel)]="fechaTermino"
-              id="correo"
-              name="fechaTermino"
-              type="date"
-              class="p-2 border border-gray-300 rounded-md"
-              required
+            [(ngModel)]="fechaTermino"
+            id="correo"
+            name="fechaTermino"
+            type="date"
+            class="p-2 border border-gray-300 rounded-md"
+            required
             />
           </div>
           <div class="flex flex-col mt-4">
             <label for="correo" class="mb-2 text-sm">Encargado</label>
             <input
-              [(ngModel)]="encargado"
-              id="correo"
-              name="encargado"
-              type="text"
-              class="p-2 border border-gray-300 rounded-md"
+            [(ngModel)]="encargado"
+            id="correo"
+            name="encargado"
+            type="text"
+            class="p-2 border border-gray-300 rounded-md"
               required
-            />
-          </div>
-          <div class="mt-6 flex justify-end">
-            <button
+              />
+            </div>
+            <div class="mt-6 flex justify-end">
+              <button
               type="button"
               class="mr-4 px-4 py-2 bg-gray-500 text-white rounded-lg"
               (click)="closeModal()"
-            >
+              >
               Cancelar
             </button>
             <button
-              type="submit"
-              class="px-4 py-2 bg-gray-800 text-white rounded-lg"
+            type="submit"
+            class="px-4 py-2 bg-gray-800 text-white rounded-lg"
             >
               Guardar
             </button>

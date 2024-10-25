@@ -1,7 +1,9 @@
-<div class="container mx-auto p-4">
+<div class="flex items-baseline justify-between">
+  <app-sidebar class="flex-none"></app-sidebar>
+  <div class="container mx-auto p-4">
     <h1 class="text-3xl font-sans mb-2 font-bold">Registro</h1>
     <h2 class="text-2xl  mb-4 text-left">Detalles del Trabajador</h2>
-  
+    
     <div class="flex justify-between">
       <!-- Recuadro con los detalles del trabajador -->
       <div class="bg-white p-4 rounded shadow w-1/2 mr-2">
@@ -44,26 +46,26 @@
           </select>
         </div>
         <div class="mb-4 flex justify-between">
-            <label class="block text-gray-700 font-bold">Cargo:</label>
+          <label class="block text-gray-700 font-bold">Cargo:</label>
             <select [(ngModel)]="trabajador.cargo" class="border border-gray-300 p-2 w-2/6">
               <option *ngFor="let cargo of cargos" [value]="cargo">{{ cargo }}</option>
             </select>
           </div>
-        <div class="mb-4 flex justify-between">
-          <label class="block text-gray-700 font-bold">Faena:</label>
-          <select [(ngModel)]="trabajador.faena" class="border border-gray-300 p-2 w-2/6">
-            <option *ngFor="let faena of faenas" [value]="faena.nombre">{{ faena.nombre }}</option>
-          </select>
+          <div class="mb-4 flex justify-between">
+            <label class="block text-gray-700 font-bold">Faena:</label>
+            <select [(ngModel)]="trabajador.faena" class="border border-gray-300 p-2 w-2/6">
+              <option *ngFor="let faena of faenas" [value]="faena.nombre">{{ faena.nombre }}</option>
+            </select>
+          </div>
+          <div class="flex justify-start mt-4">
+            <button class="bg-gray-800 text-white p-2 rounded">Ingresar a Faena</button>
+          </div>
         </div>
-        <div class="flex justify-start mt-4">
-          <button class="bg-gray-800 text-white p-2 rounded">Ingresar a Faena</button>
-        </div>
-      </div>
   
-      <!-- Recuadro para escanear trabajador y mostrar imagen -->
-      <div class="bg-white p-4 rounded shadow w-1/3">
-        <div class="flex flex-col items-center">
-          <button class="bg-gray-800 text-white p-2 rounded mb-2">Escanear Trabajador</button>
+        <!-- Recuadro para escanear trabajador y mostrar imagen -->
+        <div class="bg-white p-4 rounded shadow w-1/3">
+          <div class="flex flex-col items-center">
+            <button class="bg-gray-800 text-white p-2 rounded mb-2">Escanear Trabajador</button>
           <img [src]="trabajador.fotoUrl" alt="{{ trabajador.nombre }} {{ trabajador.apellido }}" class="rounded" style="width: 700px; height: auto;" />
           <label class="block text-gray-700 mt-2">¿El trabajador no existe?</label>
           <button class="bg-gray-800 text-white p-2 rounded mt-2" (click)="openModal()">Agregar Trabajador</button>
@@ -71,6 +73,7 @@
       </div>
     </div>
   </div>
+</div>
   <!--Modal-->
   <div
   class="fixed z-10 inset-0 overflow-y-auto"

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LayoutComponent } from '../../shared/components/layout/layout.component';
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
 interface Trabajador {
   nombre: string;
@@ -15,7 +17,7 @@ interface Trabajador {
 @Component({
   selector: 'app-verificacion',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LayoutComponent, SidebarComponent],
   templateUrl: './verificacion.component.html',
   styleUrls: ['./verificacion.component.css']
 })

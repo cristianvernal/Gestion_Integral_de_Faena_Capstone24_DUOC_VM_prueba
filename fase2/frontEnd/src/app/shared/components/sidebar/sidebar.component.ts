@@ -5,11 +5,16 @@ import { RouterModule } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatButtonModule,MatToolbarModule, MatListModule, MatIconModule, MatSidenavModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
