@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
-  styleUrl: './reportes.component.css'
+  styleUrl: './reportes.component.css',
+  standalone: true,
+  imports: [SidebarComponent, CommonModule, FormsModule]
 })
 export class ReportesComponent {
   workerName: string = '';

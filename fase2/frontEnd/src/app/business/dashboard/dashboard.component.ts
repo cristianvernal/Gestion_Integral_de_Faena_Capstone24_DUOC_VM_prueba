@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator'; // Importa MatPagina
 import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { LayoutComponent } from "../../shared/components/layout/layout.component";
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
 // Definición de la interfaz Faena
 interface Faena {
@@ -19,7 +21,7 @@ interface Faena {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatPaginator, CommonModule, FormsModule],
+  imports: [MatPaginator, CommonModule, FormsModule, LayoutComponent, LayoutComponent, SidebarComponent],
 // Asegúrate de importar MatPaginator
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
