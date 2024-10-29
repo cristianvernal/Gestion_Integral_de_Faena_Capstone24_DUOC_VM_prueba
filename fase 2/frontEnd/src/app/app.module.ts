@@ -31,7 +31,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
+
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MatPaginator } from '@angular/material/paginator';

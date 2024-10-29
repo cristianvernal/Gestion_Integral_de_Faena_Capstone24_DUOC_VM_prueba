@@ -6,10 +6,10 @@
     <!-- Input para buscar trabajador -->
     <div class="flex justify-center mb-6">
       <input
-      [(ngModel)]="workerName"
-      type="text"
-      placeholder="Nombre del trabajador"
-      class="px-4 py-2 border rounded-md w-1/2"
+        [(ngModel)]="workerName"
+        type="text"
+        placeholder="Nombre del trabajador"
+        class="px-4 py-2 border rounded-md w-1/2"
       />
       <button (click)="searchWorker()" class="ml-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-blue-600">
         Buscar
@@ -41,6 +41,7 @@
       </table>
     </div>
     
+    <!-- Mensaje en caso de no encontrar faenas -->
     <div *ngIf="!workerFanas.length && searched">
       <p class="text-center text-red-500">No se encontraron faenas para el trabajador {{ workerName }}</p>
     </div>

@@ -1,7 +1,7 @@
-<div class="flex items-baseline justify-between">
-  <app-sidebar ></app-sidebar>
+<div class="flex flex-col md:flex-row ">
+  <app-sidebar class="w-full md:w-1/5"></app-sidebar>
   
-  <div class="flex-auto container">
+  <div class="flex-auto container md:w-3/4">
     <div class="flex justify-between items-center p-4">
       <h1 class="text-3xl font-sans ml-2 font-bold">Gestión</h1>
       <button (click)="openModal()" class="bg-gray-800 text-white p-2 rounded">
@@ -47,6 +47,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- Modal -->

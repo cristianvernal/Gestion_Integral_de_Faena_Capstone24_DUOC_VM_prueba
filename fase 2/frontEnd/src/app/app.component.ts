@@ -11,7 +11,7 @@ import { Route, Router } from '@angular/router';
   styleUrl: './app.component.css'
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'Toma de Asistencia';
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
@@ -44,11 +44,6 @@ export class AppComponent implements OnInit{
       this.authService.loginPopup();
     }
   }
-  // logout() { 
-  //   this.authService.logoutPopup({
-  //     mainWindowRedirectUri: 'http://localhost:4200',
-  //   });
-  // }
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }

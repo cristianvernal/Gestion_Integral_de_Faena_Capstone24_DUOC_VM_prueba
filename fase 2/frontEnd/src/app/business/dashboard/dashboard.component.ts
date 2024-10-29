@@ -10,6 +10,10 @@ import Swal from 'sweetalert2'
 import { LayoutComponent } from "../../shared/components/layout/layout.component";
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
+import { HeaderComponent } from '../../shared/components/header/header.component';
+
+
+
 // Definición de la interfaz Faena
 interface Faena {
   nombre: string;
@@ -21,7 +25,7 @@ interface Faena {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatPaginator, CommonModule, FormsModule, LayoutComponent, LayoutComponent, SidebarComponent],
+  imports: [MatPaginator, CommonModule, FormsModule, LayoutComponent, LayoutComponent, SidebarComponent, HeaderComponent],
 // Asegúrate de importar MatPaginator
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
