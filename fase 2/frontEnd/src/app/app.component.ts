@@ -8,7 +8,7 @@ import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 
 export class AppComponent {
@@ -37,7 +37,7 @@ export class AppComponent {
       this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest,)
       .subscribe({
         next: (result) => {
-          this.router.navigate(['dashboard'])
+          this.router.navigate(['usuario'])
         }
       })
     } else {

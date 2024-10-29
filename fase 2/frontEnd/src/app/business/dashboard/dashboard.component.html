@@ -1,14 +1,12 @@
-<div class="flex flex-col md:flex-row ">
-  <app-sidebar class="w-full md:w-1/5"></app-sidebar>
-  
-  <div class="flex-auto container md:w-3/4">
-    <div class="flex justify-between items-center p-4">
-      <h1 class="text-3xl font-sans ml-2 font-bold">Gestión</h1>
+<div class="flex flex-col md:flex-row font-mono">
+  <app-sidebar class="w-full md:w-1/5"> </app-sidebar>
+  <div class="flex flex-col container md:w-3/4">
+    <div class="flex justify-between p-4 mt-10">
+      <h1 class="text-3xl ml-2 font-bold">Gestión</h1>
       <button (click)="openModal()" class="bg-gray-800 text-white p-2 rounded">
         Crear Faena
       </button>
     </div>
-    
     <div class="overflow-x-auto mt-4">
       <table class="min-w-full bg-white border border-gray-200">
         <thead>
@@ -23,72 +21,112 @@
         <tbody>
           <tr *ngFor="let faena of faenas" class="hover:bg-gray-100">
             <td class="py-2 px-4 border-b">{{ faena.nombre }}</td>
-            <td class="py-2 px-4 border-b text-center">{{ faena.fechaInicio }}</td>
-            <td class="py-2 px-4 border-b text-center">{{ faena.fechaTermino }}</td>
+            <td class="py-2 px-4 border-b text-center">
+              {{ faena.fechaInicio }}
+            </td>
+            <td class="py-2 px-4 border-b text-center">
+              {{ faena.fechaTermino }}
+            </td>
             <td class="py-2 px-4 border-b">{{ faena.encargado }}</td>
             <td class="py-2 px-4 border-b">
-              <button class="text-green-500 hover:underline">
-                <span class="material-icons">person</span>
-              </button>
-              <button class="text-blue-500 hover:underline">
-                <span class="material-icons">edit</span>
-              </button>
-              <button class="text-red-500 hover:underline">
-                <span class="material-icons">delete</span>
-              </button>
+              <div class="group relative inline-block">
+                <button
+                  class="text-green-500   focus:outline-none"
+                >
+                  <span class="material-icons">person</span>
+                </button>
+                <span
+                  class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2"
+                >
+                  Trabajadores
+                </span>
+              </div>
+              <div class="group relative inline-block">
+                <button
+                  class="text-blue-500 hover:underline focus:outline-none"
+                >
+                  <span class="material-icons">edit</span>
+                </button>
+                <span
+                  class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2"
+                >
+                  Editar
+                </span>
+              </div>
+              <div class="group relative inline-block">
+                <button class="text-red-500 hover:underline focus:outline-none">
+                  <span class="material-icons">delete</span>
+                </button>
+                <span
+                  class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2"
+                >
+                  Eliminar
+                </span>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
-      <mat-paginator [length]="faenas.length"
+      <mat-paginator
+        [length]="faenas.length"
         (page)="onPageChange($event)"
-        aria-label="Select page">
+        aria-label="Select page"
+      >
       </mat-paginator>
     </div>
+    <app-footer></app-footer>
   </div>
 </div>
 
-
-
 <!-- Modal -->
 <div
-  class="fixed z-10 inset-0 overflow-y-auto"
-  *ngIf="isModalOpen"
+  class="fixed z-10 inset-0 overflow-y-auto font-mono"
+  *ngIf="isModalOpen; else closeModalTemplate"
   aria-labelledby="modal-title"
   role="dialog"
   aria-modal="true"
-  >
+  (click)="closeModal()"
+>
   <div class="fixed inset-0 bg-black bg-opacity-50"></div>
   <div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-1/2 transform transition-transform duration-300"
-    [ngClass]="{ 'scale-100': isModalOpen, 'scale-95': !isModalOpen }">
-    <div class="p-4 border-b bg-black">
-      <h3 class="text-lg font-medium text-white" id="modal-title">
-        Agregar Nueva Faena
-      </h3>
-      <button (click)="isModalOpen = false" class="absolute top-2 right-4 text-white focus:outline-none text-2xl p-2">
-        &times; <!-- Símbolo de X -->
-      </button>
-    </div>
-    <div class="p-6 space-y-4">
-      <!-- Formulario en el modal -->
-      <form (ngSubmit)="submitForm()">
-        <div class="flex flex-col">
-          <label for="nombre" class="mb-2 text-sm">Nombre</label>
-          <input
-          [(ngModel)]="nombre"
-          id="nombre"
-          name="nombre"
-          type="text"
-          class="p-2 border border-gray-300 rounded-md"
-          required
-          />
-        </div>
+    <div
+      class="bg-white rounded-lg shadow-lg overflow-hidden w-1/4 transform"
+      [ngClass]="isModalOpen ? 'modal slide-in' : 'modal slide-out'"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="p-4 border-b bg-black">
+        <h3 class="text-lg font-medium text-white" id="modal-title">
+          Agregar Nueva Faena
+        </h3>
+        <button
+          (click)="closeModal()"
+          class="absolute top-2 right-4 text-white focus:outline-none text-2xl p-2"
+        >
+          &times;
+          <!-- Símbolo de X -->
+        </button>
+      </div>
+      <div class="p-6 space-y-4">
+        <!-- Formulario en el modal -->
+        <form (ngSubmit)="submitForm()">
+          <div class="flex flex-col">
+            <label for="nombre" class="mb-2 text-sm">Nombre</label>
+            <input
+              [(ngModel)]="nombre"
+              id="nombre"
+              name="nombre"
+              type="text"
+              class="p-2 border border-gray-300 rounded-md"
+              required
+            />
+          </div>
           <div class="flex flex-col mt-4">
-            <label for="apellido" class="mb-2 text-sm">Fecha de Inicio</label>
+            <label for="fechaInicio" class="mb-2 text-sm"
+              >Fecha de Inicio</label
+            >
             <input
               [(ngModel)]="fechaInicio"
-              id="apellido"
+              id="fechaInicio"
               name="fechaInicio"
               type="date"
               class="p-2 border border-gray-300 rounded-md"
@@ -96,38 +134,33 @@
             />
           </div>
           <div class="flex flex-col mt-4">
-            <label for="correo" class="mb-2 text-sm">Fecha de Término</label>
+            <label for="fechaTermino" class="mb-2 text-sm"
+              >Fecha de Término</label
+            >
             <input
-            [(ngModel)]="fechaTermino"
-            id="correo"
-            name="fechaTermino"
-            type="date"
-            class="p-2 border border-gray-300 rounded-md"
-            required
+              [(ngModel)]="fechaTermino"
+              id="fechaTermino"
+              name="fechaTermino"
+              type="date"
+              class="p-2 border border-gray-300 rounded-md"
+              required
             />
           </div>
           <div class="flex flex-col mt-4">
-            <label for="correo" class="mb-2 text-sm">Encargado</label>
+            <label for="encargado" class="mb-2 text-sm">Encargado</label>
             <input
-            [(ngModel)]="encargado"
-            id="correo"
-            name="encargado"
-            type="text"
-            class="p-2 border border-gray-300 rounded-md"
+              [(ngModel)]="encargado"
+              id="encargado"
+              name="encargado"
+              type="text"
+              class="p-2 border border-gray-300 rounded-md"
               required
-              />
-            </div>
-            <div class="mt-6 flex justify-end">
-              <button
-              type="button"
-              class="mr-4 px-4 py-2 bg-gray-500 text-white rounded-lg"
-              (click)="closeModal()"
-              >
-              Cancelar
-            </button>
+            />
+          </div>
+          <div class="mt-6 flex justify-end">
             <button
-            type="submit"
-            class="px-4 py-2 bg-gray-800 text-white rounded-lg"
+              type="submit"
+              class="px-4 py-2 bg-gray-800 text-white rounded-lg"
             >
               Guardar
             </button>
@@ -137,5 +170,7 @@
     </div>
   </div>
 </div>
-
-
+<ng-template #closeModalTemplate>
+  <div></div>
+  <!-- Este espacio es necesario para manejar el cierre del modal sin interferencias -->
+</ng-template>

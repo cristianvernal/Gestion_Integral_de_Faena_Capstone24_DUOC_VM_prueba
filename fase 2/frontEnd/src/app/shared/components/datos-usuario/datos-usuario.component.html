@@ -1,1 +1,73 @@
-<p>datos-usuario works!</p>
+<!-- Modal -->
+<div
+class="fixed z-10 inset-0 overflow-y-auto"
+  *ngIf="isModalOpen"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+<div class="fixed inset-0 bg-black bg-opacity-50"></div>
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-1/6 transform transition-transform duration-300"
+    [ngClass]="isModalOpen ? 'modal slide-in' : 'modal slide-out'"
+    (click)="$event.stopPropagation()">
+      <div class="p-4 border-b bg-black">
+        <h3 class="text-lg font-medium text-white" id="modal-title">
+          Llenar datos personales
+        </h3>
+        <button (click)="isModalOpen = false" class="absolute top-2 right-4 text-white focus:outline-none text-2xl p-2">
+          &times; <!-- Símbolo de X -->
+        </button>
+      </div>
+      <div class="p-6 space-y-4">
+        <!-- Formulario en el modal -->
+        <form (ngSubmit)="submitForm()">
+          <div class="flex flex-col">
+            <label for="nombre" class="mb-2 text-sm">Nombre</label>
+            <input
+              [(ngModel)]="nombre"
+              id="nombre"
+              name="nombre"
+              type="text"
+              class="p-2 border border-gray-300 rounded-md"
+              placeholder="Nombre"
+              required
+            />
+          </div>
+          <div class="flex flex-col mt-4">
+            <label for="apellido" class="mb-2 text-sm">Apellido</label>
+            <input
+              [(ngModel)]="apellido"
+              id="apellido"
+              name="apellido"
+              type="text"
+              class="p-2 border border-gray-300 rounded-md"
+              placeholder="Apellido"
+              required
+            />
+          </div>
+          <div class="flex flex-col mt-4">
+            <label for="correo" class="mb-2 text-sm">Correo</label>
+            <input
+              [(ngModel)]="correo"
+              id="correo"
+              name="correo"
+              type="email"
+              class="p-2 border border-gray-300 rounded-md"
+              placeholder="Correo"
+              required
+            />
+          </div>
+          <div class="mt-6 flex justify-end">
+            <button
+              type="submit"
+              class="px-4 py-2 bg-gray-800 text-white rounded-lg"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { LayoutComponent } from '../../shared/components/layout/layout.component';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [CommonModule, FormsModule, LayoutComponent, SidebarComponent], // Asegúrate de incluir FormsModule aquí
+  imports: [CommonModule, FormsModule, LayoutComponent, SidebarComponent, FooterComponent], 
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })

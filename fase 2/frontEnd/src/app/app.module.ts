@@ -58,17 +58,10 @@ import { DatosUsuarioComponent } from './shared/components/datos-usuario/datos-u
   imports: [
     BrowserModule,
     LayoutComponent,
-    MatDialogModule,
-    MatInputModule,
     FormsModule,
     MatPaginator,
     AppRoutingModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatListModule,
-    MatTableModule,
-    MatSidenavModule,
-    MatIconModule,
+    
     // Import the HTTP client.
     HttpClientModule,
     // Initiate the MSAL library with the MSAL configuration object

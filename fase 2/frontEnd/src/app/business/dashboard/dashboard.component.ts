@@ -11,6 +11,7 @@ import { LayoutComponent } from "../../shared/components/layout/layout.component
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
 import { HeaderComponent } from '../../shared/components/header/header.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
 
 
 
@@ -25,18 +26,21 @@ interface Faena {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatPaginator, CommonModule, FormsModule, LayoutComponent, LayoutComponent, SidebarComponent, HeaderComponent],
+  imports: [MatPaginator, CommonModule, FormsModule, LayoutComponent, SidebarComponent, FooterComponent, HeaderComponent],
 // Asegúrate de importar MatPaginator
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export  class DashboardComponent {
+  constructor(private router: Router) {this.currentYear = new Date().getFullYear();}
+  
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null; // Obtén el paginador
   isModalOpen = false;
   nombre: string = '';
   fechaInicio: string = '';
   fechaTermino: string = '';
   encargado: string = '';
+  currentYear: number;
 
   openModal() {
     this.isModalOpen = true;
@@ -69,7 +73,6 @@ export  class DashboardComponent {
   pageSize = 5; // Número de faenas por página
   currentPage = 0; // Página actual (comienza en 0)
 
-  constructor(private router: Router) {}
 
   irACrearFaena() {
     this.router.navigate(['crear-faena']);
@@ -97,4 +100,5 @@ export  class DashboardComponent {
     this.fechaTermino = '';
     this.encargado = '';
   }
+  
 }
