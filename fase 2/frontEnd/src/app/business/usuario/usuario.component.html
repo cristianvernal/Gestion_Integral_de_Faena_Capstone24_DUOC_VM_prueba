@@ -1,15 +1,15 @@
-<div class="flex items-start mx-auto justify-between"> <!-- Cambié items-baseline a items-start para mejor alineación -->
-  <app-sidebar class="flex-none"></app-sidebar>
-  
-  <div class="flex flex-col flex-grow ml-4 container"> <!-- Permite que esta sección ocupe el espacio restante -->
-    <h1 class="text-3xl font-sans mb-2">Cuenta</h1>
+<div class="flex items-start mx-auto"> <!-- Flex container for sidebar and content -->
+  <app-sidebar class="flex-none w-1/5"></app-sidebar> <!-- Sidebar con un ancho fijo -->
+
+  <div class="flex flex-col flex-grow ml-4 container"> <!-- Contenedor para el contenido a la derecha -->
+    <h1 class="text-3xl font-sans mb-2 mt-10">Cuenta</h1>
     
     <div class="w-full border-b-4 border-b-black mb-4"></div>
     
-    <div class="flex items-center space-x-6">
+    <div class="flex items-center space-x-6 mb-4">
       <div class="w-80 h-80 rounded-full overflow-hidden border-2 border-gray-300 shadow-lg">
         <img
-          [src]="selectedImage ? selectedImage : 'img/istockphoto-1386479313-612x612.jpg'"
+          [src]="selectedImage ? selectedImage : 'img/img9 (1).png'"
           alt="Foto de perfil"
           class="w-full h-full object-cover"
         />
@@ -28,41 +28,49 @@
       </div>
     </div>
     
-    <div class="w-full border-b-4 border-b-black mb-4 mt-4"></div>
+    <div class="w-full border-b-4 border-b-black mb-4"></div>
     
+    <!-- Contenedor para los datos personales -->
     <div class="flex space-x-6">
       <div class="w-1/3">
         <h1 class="text-3xl font-sans mb-2">Datos Personales</h1>
       </div>
-      <div class="w-2/3 space-y-4">
-        <div class="flex items-center">
-          <label class="w-16 text-sm" for="nombre">Nombre</label>
-          <input
-            id="nombre"
-            type="text"
-            class="w-2/5 p-2 border border-gray-300 rounded-md"
-            placeholder="Nombre"
-          />
+      
+      <!-- Contenedor de inputs y botón -->
+      <div class="w-2/3 ">
+        <!-- Inputs de datos personales -->
+        <div class="flex flex-col space-y-4 ">
+          <div class="flex items-center">
+            <label class="w-16 text-sm" for="nombre">Nombre</label>
+            <input
+              id="nombre"
+              type="text"
+              class="w-2/5 p-2 border border-gray-300 rounded-md"
+              placeholder="Nombre"
+            />
+          </div>
+          <div class="flex items-center">
+            <label class="w-16 text-sm" for="apellido">Apellido</label>
+            <input
+              id="apellido"
+              type="text"
+              class="w-2/5 p-2 border border-gray-300 rounded-md"
+              placeholder="Apellido"
+            />
+          </div>
+          <div class="flex items-center">
+            <label class="w-16 text-sm" for="correo">Correo</label>
+            <input
+              id="correo"
+              type="email"
+              class="w-2/5 p-2 border border-gray-300 rounded-md"
+              placeholder="Correo"
+            />
+          </div>
         </div>
-        <div class="flex items-center">
-          <label class="w-16 text-sm" for="apellido">Apellido</label>
-          <input
-            id="apellido"
-            type="text"
-            class="w-2/5 p-2 border border-gray-300 rounded-md"
-            placeholder="Apellido"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-16 text-sm" for="correo">Correo</label>
-          <input
-            id="correo"
-            type="email"
-            class="w-2/5 p-2 border border-gray-300 rounded-md"
-            placeholder="Correo"
-          />
-        </div>
-        <div class="flex justify-center mt-4"> <!-- Cambiado a justify-end para alinearlo a la derecha -->
+        
+        <!-- Contenedor del botón alineado a la derecha -->
+        <div class="justify-self-end mt-4 w-8/12 m-5">
           <button
             class="px-4 py-3 bg-gray-800 text-white font-semibold rounded-lg focus:outline-none"
             (click)="openModal()"
@@ -72,9 +80,9 @@
         </div>
       </div>
     </div>
+    <app-footer></app-footer>
   </div>
 </div>
-
 
 <!-- Modal -->
 <div
@@ -86,8 +94,9 @@ class="fixed z-10 inset-0 overflow-y-auto"
 >
 <div class="fixed inset-0 bg-black bg-opacity-50"></div>
   <div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-1/2 transform transition-transform duration-300"
-         [ngClass]="{ 'scale-100': isModalOpen, 'scale-95': !isModalOpen }">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-1/6 transform transition-transform duration-300"
+    [ngClass]="isModalOpen ? 'modal slide-in' : 'modal slide-out'"
+    (click)="$event.stopPropagation()">
       <div class="p-4 border-b bg-black">
         <h3 class="text-lg font-medium text-white" id="modal-title">
           Llenar datos personales
@@ -136,13 +145,6 @@ class="fixed z-10 inset-0 overflow-y-auto"
             />
           </div>
           <div class="mt-6 flex justify-end">
-            <button
-              type="button"
-              class="mr-4 px-4 py-2 bg-gray-500 text-white rounded-lg"
-              (click)="closeModal()"
-            >
-              Cancelar
-            </button>
             <button
               type="submit"
               class="px-4 py-2 bg-gray-800 text-white rounded-lg"

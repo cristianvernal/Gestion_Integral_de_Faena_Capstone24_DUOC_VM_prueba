@@ -6,14 +6,15 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2'
 import { LayoutComponent } from '../../shared/components/layout/layout.component';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
 
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [FormsModule, CommonModule, LayoutComponent, SidebarComponent],
+  imports: [FormsModule, CommonModule, LayoutComponent, SidebarComponent, FooterComponent],
   templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css'], // Corrige `styleUrl` a `styleUrls`
+  styleUrls: ['./usuario.component.css'], 
 })
 export class UsuarioComponent {
   selectedImage: string | ArrayBuffer | null = null;
@@ -24,10 +25,10 @@ export class UsuarioComponent {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        this.selectedImage = reader.result; // Almacena la imagen seleccionada
+        this.selectedImage = reader.result; 
       };
 
-      reader.readAsDataURL(file); // Lee la imagen como una URL de datos
+      reader.readAsDataURL(file); 
     }
   }
 
@@ -46,9 +47,6 @@ export class UsuarioComponent {
   }
 
   submitForm() {
-    console.log('Nombre:', this.nombre);
-    console.log('Apellido:', this.apellido);
-    console.log('Correo:', this.correo);
     Swal.fire('Datos guardados exitosamente'); // Muestra la alerta
   this.closeModal();
 

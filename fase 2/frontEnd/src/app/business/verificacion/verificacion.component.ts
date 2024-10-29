@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LayoutComponent } from '../../shared/components/layout/layout.component';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
 
 interface Trabajador {
   nombre: string;
@@ -17,15 +18,15 @@ interface Trabajador {
 @Component({
   selector: 'app-verificacion',
   standalone: true,
-  imports: [CommonModule, FormsModule, LayoutComponent, SidebarComponent],
+  imports: [CommonModule, FormsModule, LayoutComponent, SidebarComponent, FooterComponent],
   templateUrl: './verificacion.component.html',
   styleUrls: ['./verificacion.component.css']
 })
 export default class ProfileComponent {
   faenas = [
-    { nombre: 'Faena 1' },
-    { nombre: 'Faena 2' },
-    { nombre: 'Faena 3' }
+    { nombre: 'Mensaje masivo 1' },
+    { nombre: 'Mensaje masivo 2' },
+    { nombre: 'Mensaje masivo 3' }
   ];
 
   trabajadores: Trabajador[] = [

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { FooterComponent } from '../footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
@@ -11,7 +10,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [HeaderComponent, SidebarComponent, FooterComponent, RouterOutlet, CommonModule],
+  imports: [HeaderComponent, SidebarComponent, RouterOutlet, CommonModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
