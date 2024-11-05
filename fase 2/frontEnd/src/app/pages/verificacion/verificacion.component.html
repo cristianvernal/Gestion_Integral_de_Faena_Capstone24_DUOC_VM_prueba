@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="header">
+      <h2 class="text-3xl font-bold">Verificación</h2>
+    </div>
+    <mat-form-field>
+      <mat-label>Faenas</mat-label>
+      <mat-select>
+        @for (food of foods; track food) {
+          <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <mat-select>
+        @for (estado of estados; track estado) {
+          <mat-option [value]="estado.value">{{estado.viewValue}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Crear Faena</button>
+    <app-ui-table [data]="verificacion" [columns]="tableColumns"/>
+    <app-footer></app-footer>
+  </div>

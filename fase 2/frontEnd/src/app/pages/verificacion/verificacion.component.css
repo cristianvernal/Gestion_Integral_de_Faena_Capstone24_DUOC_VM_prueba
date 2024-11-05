@@ -1,0 +1,24 @@
+.container {
+    max-width: 1600px; /* Asegura que la tabla no se estire demasiado */
+    margin: 0 auto; /* Centra el contenido */
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px; /* Espaciado alrededor del encabezado */
+  }
+  
+  .mat-table {
+    width: 100%; /* Asegura que la tabla use todo el ancho disponible */
+  }
+
+  .mat-header-cell {
+    font-weight: bold; /* Resaltar encabezados */
+  }
+
+  mat-form-field {
+    margin-right: 350px; /* Ajusta el tamaño del margen según prefieras */
+  }
+  
+  
