@@ -18,11 +18,10 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig, protectedResources } from './auth-config';
 
 // Import the Angular HTTP interceptor.
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { ProfileComponent } from './authentication/profile/profile.component';
 import { HomeComponent } from './authentication/home/home.component';
 import { WebapiComponent } from './authentication/webapi/webapi.component';
-
 // Add the essential Angular materials.
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -61,7 +60,6 @@ import { DatosUsuarioComponent } from './shared/components/datos-usuario/datos-u
     FormsModule,
     MatPaginator,
     AppRoutingModule,
-    
     // Import the HTTP client.
     HttpClientModule,
     // Initiate the MSAL library with the MSAL configuration object

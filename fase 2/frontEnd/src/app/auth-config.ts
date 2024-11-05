@@ -1,4 +1,13 @@
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { LogLevel, Configuration, BrowserCacheLocation } from '@azure/msal-browser';
+
+
+
+export const appConfig: ApplicationConfig = {
+    providers: [provideHttpClient()]
+}
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
  
