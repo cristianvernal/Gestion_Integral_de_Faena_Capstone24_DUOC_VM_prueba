@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,19 +20,36 @@ import cl.capstone.ms_gestion_transporte.model.Response;
 import cl.capstone.ms_gestion_transporte.service.IRegistroTransporteService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*") // CORS para todos los endpoints en esta clase
 public class RegistroTransporteController {
 
     @Autowired
     IRegistroTransporteService registroTransporteService;
 
     @PostMapping("/registrotransporte/crear")
-    public String saveRegistroTransporte(@RequestBody RegistroTransporte registroTransporte) {
+    public ResponseEntity<Response> saveRegistroTransporte(@RequestBody RegistroTransporte registroTransporte) {
 
-        // Response response = new Response();
-        // LocalDateTime currentDate = LocalDateTime.now();
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        registroTransporteService.saveRegistroTransporte(registroTransporte);
-        return "Registro de transporte creado";
+        RegistroTransporte nuevoRegistroTransporte = registroTransporteService
+                .saveRegistroTransporte(registroTransporte);
+
+        if (nuevoRegistroTransporte != null) {
+            // Si existe el trabajador, procedemos a eliminarlo
+            response.setCodigoRetorno(0); // Código de éxito
+            response.setGlosaRetorno("Registro creado.");
+            response.setResultado(nuevoRegistroTransporte);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            // Si el trabajador no existe, retornamos un mensaje de error
+            response.setCodigoRetorno(-1); // Código de error
+            response.setGlosaRetorno("No se pudo crear el registro.");
+            response.setResultado(null);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/registrotransporte/borrar/{id}")

@@ -8,11 +8,14 @@ public interface IRegistroAsistenciaService {
 
     public List<RegistroAsistencia> getRegistroAsistencias();
 
-    public void saveRegistroAsistencias(RegistroAsistencia registroAsistencia);
+    public RegistroAsistencia saveRegistroAsistencias(RegistroAsistencia registroAsistencia);
 
     public void deleteRegistroAsistencia(Long id);
 
     public RegistroAsistencia findRegistroAsistencia(Long id);
 
     public void editRegistroAsistencia(RegistroAsistencia registroAsistencia);
+
+    public List<RegistroAsistencia> findByIdFaena(int idFaena);
+
 }

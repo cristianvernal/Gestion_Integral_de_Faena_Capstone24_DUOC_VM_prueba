@@ -8,7 +8,7 @@ public interface IRegistroTransporteService {
 
     public List<RegistroTransporte> getRegistroTransportes();
 
-    public void saveRegistroTransporte(RegistroTransporte registroTransporte);
+    public RegistroTransporte saveRegistroTransporte(RegistroTransporte registroTransporte);
 
     public void deleteRegistroTransporte(Long id);
 

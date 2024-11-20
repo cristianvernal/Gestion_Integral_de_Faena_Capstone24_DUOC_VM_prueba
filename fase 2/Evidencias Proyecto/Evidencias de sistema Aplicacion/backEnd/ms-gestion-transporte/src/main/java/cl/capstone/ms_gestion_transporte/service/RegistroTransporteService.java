@@ -22,9 +22,11 @@ public class RegistroTransporteService implements IRegistroTransporteService {
     }
 
     @Override
-    public void saveRegistroTransporte(RegistroTransporte registroTransporte) {
+    public RegistroTransporte saveRegistroTransporte(RegistroTransporte registroTransporte) {
 
         registroTransporteRepository.save(registroTransporte);
+
+        return registroTransporte;
 
     }
 

@@ -22,10 +22,12 @@ public class RegistroAsistenciaService implements IRegistroAsistenciaService {
     }
 
     @Override
-    public void saveRegistroAsistencias(
+    public RegistroAsistencia saveRegistroAsistencias(
             cl.capstone.ms_registro_asistencia.model.RegistroAsistencia registroAsistencia) {
 
         registroAsistenciaRepository.save(registroAsistencia);
+
+        return registroAsistencia;
     }
 
     @Override
@@ -46,6 +48,12 @@ public class RegistroAsistenciaService implements IRegistroAsistenciaService {
 
         this.saveRegistroAsistencias(registroAsistencia);
 
+    }
+
+    @Override
+    public List<RegistroAsistencia> findByIdFaena(int idFaena) {
+
+        return registroAsistenciaRepository.findByIdFaena(idFaena);
     }
 
 }

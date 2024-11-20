@@ -22,9 +22,11 @@ public class TipoTrasladoService implements ITipoTrasladoService {
     }
 
     @Override
-    public void saveTipoTraslado(TipoTraslado tipoTraslado) {
+    public TipoTraslado saveTipoTraslado(TipoTraslado tipoTraslado) {
 
         tipoTrasladoRepository.save(tipoTraslado);
+
+        return tipoTraslado;
     }
 
     @Override

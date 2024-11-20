@@ -8,7 +8,7 @@ public interface ITipoTrasladoService {
 
     public List<TipoTraslado> getTipoTraslados();
 
-    public void saveTipoTraslado(TipoTraslado tipoTraslado);
+    public TipoTraslado saveTipoTraslado(TipoTraslado tipoTraslado);
 
     public void deleteTipoTraslado(Long id);
 

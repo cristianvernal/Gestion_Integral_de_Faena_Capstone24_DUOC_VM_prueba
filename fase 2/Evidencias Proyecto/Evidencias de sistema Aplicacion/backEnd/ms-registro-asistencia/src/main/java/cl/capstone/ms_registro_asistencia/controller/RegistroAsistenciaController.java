@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,19 +20,36 @@ import cl.capstone.ms_registro_asistencia.model.Response;
 import cl.capstone.ms_registro_asistencia.service.IRegistroAsistenciaService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*") // CORS para todos los endpoints en esta clase
 public class RegistroAsistenciaController {
 
     @Autowired
     private IRegistroAsistenciaService registroAsistenciaService;
 
     @PostMapping("/registroasistencia/crear")
-    public String saveRegistroAsistencia(@RequestBody RegistroAsistencia registroAsistencia) {
+    public ResponseEntity<Response> saveRegistroAsistencia(@RequestBody RegistroAsistencia registroAsistencia) {
 
-        // Response response = new Response();
-        // LocalDateTime currentDate = LocalDateTime.now();
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        registroAsistenciaService.saveRegistroAsistencias(registroAsistencia);
-        return "Registro creada";
+        RegistroAsistencia nuevoRegistroAsistencia = registroAsistenciaService
+                .saveRegistroAsistencias(registroAsistencia);
+
+        if (nuevoRegistroAsistencia != null) {
+            // Si existe el trabajador, procedemos a eliminarlo
+            response.setCodigoRetorno(0); // Código de éxito
+            response.setGlosaRetorno("Registro creado.");
+            response.setResultado(nuevoRegistroAsistencia);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            // Si el trabajador no existe, retornamos un mensaje de error
+            response.setCodigoRetorno(-1); // Código de error
+            response.setGlosaRetorno("No se pudo crear el registro.");
+            response.setResultado(null);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/registroasistencia/borrar/{id}")
@@ -107,6 +125,29 @@ public class RegistroAsistenciaController {
             response.setCodigoRetorno(0);
             response.setGlosaRetorno("Registros encontrados.");
             response.setResultado(registroAsistencias);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+    }
+
+    @GetMapping("/registroasistencia/traerPorFaena/{idFaena}")
+    public ResponseEntity<Response> findtrabajadorIdFaena(int idFaena) {
+
+        List<RegistroAsistencia> listaTrabajadores = registroAsistenciaService.findByIdFaena(idFaena);
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        if (listaTrabajadores == null || listaTrabajadores.isEmpty()) {
+            response.setCodigoRetorno(-1);
+            response.setGlosaRetorno("Registros no encotrados.");
+            response.setResultado(listaTrabajadores);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        } else {
+            response.setCodigoRetorno(0);
+            response.setGlosaRetorno("Registros encontrados.");
+            response.setResultado(listaTrabajadores);
             response.setTimestamp(currentDate);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

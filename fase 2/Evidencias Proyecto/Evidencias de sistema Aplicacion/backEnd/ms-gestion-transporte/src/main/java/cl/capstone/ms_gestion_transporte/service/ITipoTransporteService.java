@@ -8,7 +8,7 @@ public interface ITipoTransporteService {
 
     public List<TipoTransporte> getTipoTransportes();
 
-    public void saveTipoTransporte(TipoTransporte tipoTransporte);
+    public TipoTransporte saveTipoTransporte(TipoTransporte tipoTransporte);
 
     public void deleteTipoTransporte(Long id);
 

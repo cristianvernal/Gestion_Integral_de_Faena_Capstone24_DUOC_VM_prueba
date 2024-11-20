@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,19 +20,35 @@ import cl.capstone.ms_registro_asistencia.model.TipoRegistro;
 import cl.capstone.ms_registro_asistencia.service.ITipoRegistroService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*") // CORS para todos los endpoints en esta clase
 public class TipoRegistroController {
 
     @Autowired
     ITipoRegistroService tipoRegistroService;
 
     @PostMapping("/tiporegistro/crear")
-    public String saveTipoRegistro(@RequestBody TipoRegistro tipoRegistro) {
+    public ResponseEntity<Response> saveTipoRegistro(@RequestBody TipoRegistro tipoRegistro) {
 
-        // Response response = new Response();
-        // LocalDateTime currentDate = LocalDateTime.now();
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        tipoRegistroService.saveTipoRegistro(tipoRegistro);
-        return "Tipo registro creado";
+        TipoRegistro nuevoTipoRegistro = tipoRegistroService.saveTipoRegistro(tipoRegistro);
+
+        if (nuevoTipoRegistro != null) {
+            // Si existe el trabajador, procedemos a eliminarlo
+            response.setCodigoRetorno(0); // Código de éxito
+            response.setGlosaRetorno("Nuevo tipo de registro creado.");
+            response.setResultado(nuevoTipoRegistro);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            // Si el trabajador no existe, retornamos un mensaje de error
+            response.setCodigoRetorno(-1); // Código de error
+            response.setGlosaRetorno("No se pudo crear el nuevo tipo de registro.");
+            response.setResultado(null);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/tiporegistro/borrar/{id}")

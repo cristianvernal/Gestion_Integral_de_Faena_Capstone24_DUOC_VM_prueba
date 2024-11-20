@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.capstone.ms_gestion_trabajadores.Repository.ITrabajadorRepository;
+import cl.capstone.ms_gestion_trabajadores.dto.TrabajadorDTO;
 import cl.capstone.ms_gestion_trabajadores.model.Trabajador;
 
 @Service
@@ -22,9 +23,11 @@ public class TrabajadorService implements ITrabajadorService {
     }
 
     @Override
-    public void saveTrabajador(Trabajador trabajador) {
+    public Trabajador saveTrabajador(Trabajador trabajador) {
 
         trabajadorRepository.save(trabajador);
+
+        return trabajador;
     }
 
     @Override
@@ -41,19 +44,39 @@ public class TrabajadorService implements ITrabajadorService {
     }
 
     @Override
-    public void editTrabajador(Long id, String nuevoNombre, String nuevoApellido) {
-
-        Trabajador trabajador = this.findTrabajador(id);
-        trabajador.setPrimero_nombre(nuevoNombre);
-        trabajador.setPrimer_apellido(nuevoApellido);
+    public void editTrabajador(Trabajador trabajador) {
 
         this.saveTrabajador(trabajador);
     }
 
-    @Override
-    public void editTrabajador(Trabajador trabajador) {
+    public TrabajadorDTO findByPrimerNombre(String nombre) {
 
-        this.saveTrabajador(trabajador);
+        TrabajadorDTO trabajadorDTO = new TrabajadorDTO();
+
+        Trabajador trabajador = trabajadorRepository.findByPrimerNombre(nombre);
+        trabajadorDTO.setIdTrabajador(trabajador.getIdTrabajador());
+        trabajadorDTO.setPrimerNombre(trabajador.getPrimerNombre());
+        trabajadorDTO.setPrimerApellido(trabajador.getPrimerApellido());
+
+        return trabajadorDTO;
+
+    }
+
+    @Override
+    public String findByPrimerApellido(String apellido) {
+
+        return trabajadorRepository.findByPrimerApellido(apellido);
+    }
+
+    @Override
+    public Trabajador findByComunaAndPrimerApellido(String comuna, String apellido) {
+
+        return trabajadorRepository.findByComunaAndPrimerApellido(comuna, apellido);
+    }
+
+    public Trabajador findByRun(String run) {
+
+        return trabajadorRepository.findByRun(run);
     }
 
 }

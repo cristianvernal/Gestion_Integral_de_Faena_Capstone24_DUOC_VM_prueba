@@ -22,9 +22,11 @@ public class TipoTransporteService implements ITipoTransporteService {
     }
 
     @Override
-    public void saveTipoTransporte(TipoTransporte tipoTransporte) {
+    public TipoTransporte saveTipoTransporte(TipoTransporte tipoTransporte) {
 
         tipoTransporteRepository.save(tipoTransporte);
+
+        return tipoTransporte;
 
     }
 

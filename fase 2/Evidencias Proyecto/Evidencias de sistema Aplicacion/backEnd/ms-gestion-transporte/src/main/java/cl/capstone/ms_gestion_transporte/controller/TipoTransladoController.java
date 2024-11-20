@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,19 +20,35 @@ import cl.capstone.ms_gestion_transporte.model.TipoTraslado;
 import cl.capstone.ms_gestion_transporte.service.ITipoTrasladoService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*") // CORS para todos los endpoints en esta clase
 public class TipoTransladoController {
 
     @Autowired
     ITipoTrasladoService tipoTrasladoService;
 
     @PostMapping("/tipotraslado/crear")
-    public String saveTipoTraslado(@RequestBody TipoTraslado tipoTraslado) {
+    public ResponseEntity<Response> saveTipoTraslado(@RequestBody TipoTraslado tipoTraslado) {
 
-        // Response response = new Response();
-        // LocalDateTime currentDate = LocalDateTime.now();
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        tipoTrasladoService.saveTipoTraslado(tipoTraslado);
-        return "Tipo de traslado creado";
+        TipoTraslado nuevoTipoTraslado = tipoTrasladoService.saveTipoTraslado(tipoTraslado);
+
+        if (nuevoTipoTraslado != null) {
+            // Si existe el trabajador, procedemos a eliminarlo
+            response.setCodigoRetorno(0); // Código de éxito
+            response.setGlosaRetorno("Nuevo tipo de traslado creado.");
+            response.setResultado(nuevoTipoTraslado);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            // Si el trabajador no existe, retornamos un mensaje de error
+            response.setCodigoRetorno(-1); // Código de error
+            response.setGlosaRetorno("No se pudo crear el registro.");
+            response.setResultado(null);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/tipotraslado/borrar/{id}")
